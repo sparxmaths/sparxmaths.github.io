@@ -1,7 +1,748 @@
-<div class="section upcoming">
-    <h2>Upcoming Games</h2>
-    <ul>
-        <li>Game 1 - Coming soon!</li>
-        <li>Game 2 - Coming soon!</li>
-    </ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparx Maths</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="all-games.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 3rem auto 3rem auto;
+        padding: 0 2rem;
+      }
+
+      .game-card {
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        min-height: 200px;
+        height: 200px;
+        background: var(--card-bg, #222);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        border: 1px solid var(--border-color, #333);
+        transition: all 0.3s;
+      }
+      .game-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        transition: transform 0.3s, filter 0.3s;
+        filter: brightness(0.85);
+      }
+      .game-card:hover img {
+        transform: scale(1.05);
+        filter: brightness(1);
+      }
+      .game-card .badge {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        background: var(--secondary-bg, #444);
+        color: var(--text-color, #fff);
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        border: 1px solid var(--border-color, #333);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 2;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      @media (max-width: 600px) {
+        .games-grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+          padding: 0 0.5rem;
+        }
+        .game-card {
+          min-height: 120px;
+          height: 120px;
+        }
+      }
+      nav, h1, .back-home-btn {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+      }
+
+      .upcoming-section {
+        max-width: 1400px;
+        margin: 3rem auto;
+        padding: 2rem;
+        text-align: center;
+        background: var(--card-bg, #222);
+        border-radius: 12px;
+        border: 1px solid var(--border-color, #333);
+      }
+
+      .upcoming-section h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+        color: var(--text-color, #fff);
+      }
+
+      .upcoming-section p {
+        color: var(--text-color, #fff);
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+    </style>
+</head>
+<body>
+    <!-- Loading screen (same as page.html) -->
+    <div class="loading-screen">
+        <div class="loader">
+            <img src="Assets/Images/Logo.png" alt="Logo" class="loading-logo">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification overlay (copied from page.html) -->
+    <div class="notice-overlay" id="captchaOverlay">
+        <div class="captcha-container">
+ 
+
+            <div class="captcha-content">
+                <h3>Enter code:</h3>
+                <!-- Changed to a password input and added an id for scripting -->
+                <input id="captchaPasswordInput" type="password" class="captcha-input" placeholder="Enter code">
+                <div class="captcha-buttons">
+                    <button id="captchaConfirmBtn" class="captcha-btn confirm-btn">Confirm</button>
+                </div>
+                <div id="captchaMessage" style="color:#e74c3c;margin-top:8px;display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="nav-left">
+  <button class="nav-left" onclick="window.location.href='https://sparxmaths.com/?hsLang=en-gb';" style="background:none; border:none; padding:0; cursor:pointer;">
+    <img src="Assets/Images/Logo.png" alt="sparx Logo" class="logo">
+    <h1>Sparx</h1>
+</button>
+
+            </div>
+                </button>
+                <a href="all-games.html" class="credits-btn back-home-btn" style="padding:7px 14px;margin-right:8px;margin-left:8px;display:flex;align-items:center;justify-content:center;min-width:40px;min-height:40px;">
+                    <img src="Assets/Images/Home.png" alt="refresh" style="width:26px;height:26px;display:block;filter:invert(0);">
+                </a>
+
+            </div>
+        </nav>
+    </header>
+    <h1 style="text-align:center; margin-top:16px;">All Games</h1>
+    <div class="games-grid">
+
+
+
+                        <a class="game-card" href="Assets/Games/paperio2/index.html">
+          <img src="Assets/Game_Images/Paperio2.png" alt="Paper.io 2">
+          <span class="badge">Paper.io 2</span>
+        </a>
+        <a class="game-card" href="Assets/Games/stickman/index.html">
+          <img src="Assets/Game_Images/StickmanHook.png" alt="Stickman Hook">
+          <span class="badge">Stickman Hook</span>
+        </a>
+        <a class="game-card" href="Assets/Games/subwaysurfers/index.html">
+          <img src="Assets/Game_Images/SubwaySurfers.png" alt="Subway Surfers">
+          <span class="badge">Subway Surfers</span>
+        </a>
+
+                <a class="game-card" href="Assets/Games/tanuki-sunset/index.html">
+          <img src="Assets/Game_Images/TanukiSunset.png" alt="Tanuki Sunset">
+          <span class="badge">Tanuki Sunset</span>
+        </a>
+        
+                        <a href="Assets/Games/minecraft-case-simulator/index.html" class="game-card">
+                        <img src="Assets/Games/minecraft-case-simulator/icons/case_simulator.png" alt="Minecraft case simulator">
+                        <span class="badge">Minecraft case simulator</span>
+                    </a>
+
+
+                <a class="game-card" href="Assets/Games/drivemad/index.html">
+          <img src="Assets/Game_Images/DriveMad.png" alt="Drive Mad">
+          <span class="badge">Drive Mad</span>
+        </a>
+
+        <a class="game-card" href="Assets/Games/basketballstars/index.html">
+          <img src="Assets/Game_Images/BasketballStars.png" alt="Basketball Stars">
+          <span class="badge">Basketball Stars</span>
+        </a>
+
+        
+                            <a href="Assets/Games/among-us/index.html" class="game-card">
+                        <img src="Assets/Games/among-us/images/tiledbackground-sheet0.png" alt="G's among us">
+                        <span class="badge">Among Us</span>
+                    </a>
+
+                <a class="game-card" href="Assets/Games/bitlife/index.html">
+          <img src="Assets/Game_Images/BitLife.png" alt="BitLife">
+          <span class="badge">BitLife</span>
+        </a>
+
+                            <a href="Assets/Games/geodash/index.html" class="game-card">
+                        <img src="Assets/Games/geodash/geoscratchicon.png" alt="G's geometry dash">
+                        <span class="badge">Geometry Dash</span>
+                    </a>
+
+                <a class="game-card" href="Assets/Games/crossyroad/index.html">
+          <img src="Assets/Game_Images/CrossyRoad.png" alt="Crossy Road">
+          <span class="badge">Crossy Road</span>
+        </a>
+        
+
+                               <a href="Assets/Games/age-of-war/index.html" class="game-card">
+                        <img src="Assets/Games/age-of-war/icon.jpg" alt="G's age of war">
+                        <span class="badge">Age of War</span>
+                    </a>
+
+        
+                <a class="game-card" href="Assets/Games/driftboss/index.html">
+          <img src="Assets/Game_Images/DriftBoss.png" alt="Drift Boss">
+          <span class="badge">Drift Boss</span>
+        </a>
+
+                <a class="game-card" href="Assets/Games/ovo/index.html">
+          <img src="Assets/Game_Images/OvO.png" alt="OvO">
+          <span class="badge">OvO</span>
+        </a>
+        
+
+                <a class="game-card" href="Assets/Games/rooftop-snipers/index.html">
+          <img src="Assets/Games/rooftop-snipers/img/thumb.png" alt="G's rooftop snipers">
+          <span class="badge">Rooftop Snipers</span>
+        </a>
+        
+
+        
+
+                            <a href="Assets/Games/chrome-dino/index.html" class="game-card">
+                        <img src="Assets/Games/chrome-dino/icons/icon-114.png" alt="G's chrome dino">
+                        <span class="badge">Chrome Dino</span>
+                    </a>
+
+
+                                      <a href="Assets/Games/minecraftbeta/index.html" class="game-card">
+                        <img src="Assets/Games/minecraft/splash.jpeg" alt="G's minecraft beta">
+                        <span class="badge">Minecraft Beta (working ipad)</span>
+                    </a>
+
+
+
+                                    <a href="Assets/Games/minecraft/index.html" class="game-card">
+                        <img src="Assets/Games/minecraftbeta/bg_main.png" alt="G's minecraft">
+                        <span class="badge">Minecraft (no ipad)</span>
+                    </a>
+
+
+                <a class="game-card" href="Assets/Games/flappy-bird/index.html">
+          <img src="Assets/Game_Images/FlappyBird.png" alt="Flappy Bird">
+          <span class="badge">Flappy Bird</span>
+        </a>
+        
+
+        
+                                    <a href="Assets/Games/angry-birds/index.html" class="game-card">
+                        <img src="Assets/Games/angry-birds/sprites/bird.png" alt="G's angry birds">
+                        <span class="badge">Angry Birds</span>
+                    </a>
+
+
+        
+                                    <a href="Assets/Games/backrooms/index.html" class="game-card">
+                        <img src="Assets/Games/backrooms/splash.jpg" alt="G's backrooms">
+                        <span class="badge">Backrooms</span>
+                    </a>
+
+
+        
+                                    <a href="Assets/Games/awesome-tanks-2/index.html" class="game-card">
+                        <img src="Assets/Games/awesome-tanks-2/icon.png" alt="g's awesome tanks 2">
+                        <span class="badge">Awesome Tanks 2</span>
+                    </a>
+
+
+        
+                                    <a href="Assets/Games/basketball-io/index.html" class="game-card">
+                        <img src="Assets/Games/basketball-io/TemplateData/logo.png" alt="G's basketball io">
+                        <span class="badge">Basketball io</span>
+                    </a>
+
+
+
+                                    <a href="Assets/Games/basketball-legends-2020/index.html" class="game-card">
+                        <img src="Assets/Games/basketball-legends-2020/icon.png" alt="G's basketball legends 2020">
+                        <span class="badge">Basketball Legends 2020</span>
+                    </a>
+
+
+
+                                    <a href="Assets/Games/bloxors/index.html" class="game-card">
+                        <img src="Assets/Games/bloxors/block.png" alt="G's bloxors">
+                        <span class="badge">Bloxors</span>
+                    </a>
+
+
+
+                                    <a href="Assets/Games/btd4/index.html" class="game-card">
+                        <img src="Assets/Games/btd4/favicon.ico" alt="G's btd4">
+                        <span class="badge">BTD4</span>
+                    </a>
+
+
+        
+                                    <a href="Assets/Games/canyondefense/index.html" class="game-card">
+                        <img src="Assets/Games/canyondefense/canyondefense.png" alt="G's canyon defense">
+                        <span class="badge">Canyon Defense</span>
+                    </a>
+
+        
+                           <a href="Assets/Games/cars-simulator/index.html" class="game-card">
+                        <img src="Assets/Games/cars-simulator/splash.png" alt="G's cars simulator">
+                        <span class="badge">Cars Simulator</span>
+                    </a>
+
+
+
+                           <a href="Assets/Games/chess/index.html" class="game-card">
+                        <img src="Assets/Games/chess/icons/help-hint.png" alt="G's Chess">
+                        <span class="badge">Chess</span>
+                    </a>
+
+
+                                   <a href="Assets/Games/connect3/index.html" class="game-card">
+                        <img src="Assets/Games/connect3/favicon.png" alt="G's connect 3">
+                        <span class="badge">Connect 3</span>
+                    </a>
+
+                                   <a href="Assets/Games/creativekillchamber/index.html" class="game-card">
+                        <img src="Assets/Games/creativekillchamber/creativekillchamber.jpg" alt="G's creative kill chamber">
+                        <span class="badge">Creative Kill Chamber</span>
+                    </a>
+
+
+
+
+                                   <a href="Assets/Games/death-run-3d/index.html" class="game-card">
+                        <img src="Assets/Games/death-run-3d/img/death.png" alt="G's deathrun 3d">
+                        <span class="badge">Deathrun 3D</span>
+                    </a>
+
+
+                                   <a href="Assets/Games/defend-the-tank/index.html" class="game-card">
+                        <img src="Assets/Games/defend-the-tank/images/logo.jpg" alt="G's defend the tank">
+                        <span class="badge">Defend The Tank (portrait) </span>
+                    </a>
+
+
+                                  <a href="Assets/Games/DogeMiner/index.html" class="game-card">
+                        <img src="Assets/Games/DogeMiner/favicon.ico" alt="G's dogeminer">
+                        <span class="badge">DogeMiner</span>
+                    </a>
+
+
+
+                                  <a href="Assets/Games/doodle-jump/index.html" class="game-card">
+                        <img src="Assets/Games/doodle-jump/doodle.png" alt="G's doodle-jump">
+                        <span class="badge">Doodle Jump</span>
+                    </a>
+
+
+                                  <a href="Assets/Games/dragon-vs-bricks/index.html" class="game-card">
+                        <img src="Assets/Games/dragon-vs-bricks/icon.jpg" alt="G's dragon vs bricks">
+                        <span class="badge">Dragon vs Bricks</span>
+                    </a>
+
+                <a class="game-card" href="Assets/Games/monkey-mart/index.html">
+          <img src="Assets/Game_Images/MonkeyMart.png" alt="Monkey Mart">
+          <span class="badge">Monkey Mart</span>
+        </a>
+
+        
+
+                                  <a href="Assets/Games/ducklife/index.html" class="game-card">
+                        <img src="Assets/Games/ducklife/images/logo.jpg" alt="G's ducklife">
+                        <span class="badge">Ducklife</span>
+                    </a>
+
+        <a class="game-card" href="Assets/Games/cookieclicker/index.html">
+          <img src="Assets/Game_Images/CookieClicker.png" alt="Cookie Clicker">
+          <span class="badge">Cookie Clicker</span>
+        </a>
+
+        
+
+                                      <a href="Assets/Games/golf/index.html" class="game-card">
+                        <img src="Assets/Games/golf/icon.jpg" alt="G's golf">
+                        <span class="badge">Golf</span>
+                    </a>
+
+
+                                              <a href="Assets/Games/gravity-soccer/index.html" class="game-card">
+                        <img src="Assets/Games/gravity-soccer/icon.png" alt="G's gravity soccer">
+                        <span class="badge">Gravity Soccer</span>
+                    </a>
+
+                                              <a href="Assets/Games/google-snake/index.html" class="game-card">
+                        <img src="Assets/Games/google-snake/img/snake.png" alt="G's google snake">
+                        <span class="badge">Google Snake</span>
+                    </a>
+
+
+                                              <a href="Assets/Games/happy-wheels/index.html" class="game-card">
+                        <img src="Assets/Games/happy-wheels/assets/trigger-tile-fill-white.PNG" alt="G's happy wheels">
+                        <span class="badge">Happy Wheels</span>
+                    </a>
+
+ 
+
+                      <a href="Assets/Games/madalin-stunt-cars-2/index.html" class="game-card">
+                        <img src="Assets/Games/madalin-stunt-cars-2/img/logo.jpg" alt="G's stunt cars 2">
+                        <span class="badge">Madalin Stunt Cars 2</span>
+                    </a>
+
+
+                              <a href="Assets/Games/madalin-stunt-cars-3/index.html" class="game-card">
+                        <img src="Assets/Games/madalin-stunt-cars-3/img/index.jpg" alt="G's stunt cars 3">
+                        <span class="badge">Madalin Stunt Cars 3 (multiplayer)</span>
+
+                    </a>
+
+
+
+                              <a href="Assets/Games/mario/index.html" class="game-card">
+                        <img src="Assets/Games/mario/icon.png" alt="G's mario">
+                        <span class="badge">Mario</span>
+                    </a>
+
+
+        
+
+
+
+
+                <a class="game-card" href="Assets/Games/motox3m/index.html">
+          <img src="Assets/Game_Images/Motoc3M.png" alt="Moto X3M">
+          <span class="badge">Moto X3M</span>
+        </a>
+
+
+
+        
+
+                      <a href="Assets/Games/motox3m-spooky/index.html" class="game-card">
+                        <img src="Assets/Games/motox3m-spooky/splash.jpeg" alt="G's spooky x3m">
+                        <span class="badge">Moto x3m - Spooky</span>
+                    </a>
+
+        
+                      <a href="Assets/Games/motox3m-winter/index.html" class="game-card">
+                        <img src="Assets/Games/motox3m-winter/download.jpeg" alt="G's winter x3m">
+                        <span class="badge">Moto x3m - Winter</span>
+                    </a>
+
+        
+                      <a href="Assets/Games/motox3m-pool/index.html" class="game-card">
+                        <img src="Assets/Games/motox3m-pool/splash.jpg" alt="G's pool x3m">
+                        <span class="badge">Moto x3m - Pool</span>
+                    </a>
+
+        
+                      <a href="Assets/Games/missiles/index.html" class="game-card">
+                        <img src="Assets/Games/missiles/miss.png" alt="G's missiles">
+                        <span class="badge">Missiles</span>
+                    </a>
+
+
+        
+
+        
+                      <a href="Assets/Games/pacman/index.html" class="game-card">
+                        <img src="Assets/Games/pacman/favicon.png" alt="G's pacman">
+                        <span class="badge">Pacman</span>
+                    </a>
+
+
+
+                      <a href="Assets/Games/racer/index.html" class="game-card">
+                        <img src="Assets/Games/racer/images/sprites/truck.png" alt="G's racer">
+                        <span class="badge">Racer</span>
+                    </a>
+
+        
+        
+                      <a href="Assets/Games/skyblock/index.html" class="game-card">
+                        <img src="Assets/Games/skyblock/icons/icon-256.png" alt="G's skyblock">
+                        <span class="badge">Skyblock</span>
+                    </a>
+
+
+
+        
+                      <a href="Assets/Games/stickman-boost/index.html" class="game-card">
+                        <img src="Assets/Games/stickman-boost/base/img2.jpeg" alt="G's stickman boost">
+                        <span class="badge">Stickman Boost</span>
+                    </a>
+
+
+        
+                      <a href="Assets/Games/temple-run-2/index.html" class="game-card">
+                        <img src="Assets/Games/temple-run-2/img/temple-run-2-256.png" alt="G's temple run 2">
+                        <span class="badge">Temple Run 2</span>
+                    </a>
+
+
+
+                      <a href="Assets/Games/tunnel-rush/index.html" class="game-card">
+                        <img src="Assets/Games/tunnel-rush/icon.jpg" alt="G's tunnel rush">
+                        <span class="badge">Tunnel Rush</span>
+                    </a>
+
+
+        
+
+                      <a href="Assets/Games/worlds-hardest-game/index.html" class="game-card">
+                        <img src="Assets/Games/worlds-hardest-game/images/splash.jpg" alt="G's world's hardest game">
+                        <span class="badge">World's Hardest Game</span>
+                    </a>
+
+
+                                    <a href="Assets/Games/slope/index.html" class="game-card">
+                        <img src="Assets/Games/slope/slope4.jpeg" alt="G's Slope">
+                        <span class="badge">Slope Game</span>
+                    </a>
+
+        
+  
+        <a class="game-card" href="Assets/Games/baldisbasics/index.html">
+          <img src="Assets/Game_Images/BaldisBasics.png" alt="Baldi's Basics">
+          <span class="badge">Baldi's Basics</span>
+        </a>
+        <a class="game-card" href="Assets/Games/basketball-random/index.html">
+          <img src="Assets/Game_Images/BasketballRandom.png" alt="Basketball Random">
+          <span class="badge">Basketball Random</span>
+        </a>
+
+
+        <a class="game-card" href="Assets/Games/blockblast/index.html">
+          <img src="Assets/Game_Images/BlockBlast.png" alt="Block Blast">
+          <span class="badge">Block Blast</span>
+        </a>
+        <a class="game-card" href="Assets/Games/boxingrandom/index.html">
+          <img src="Assets/Game_Images/BoxingRandom.png" alt="Boxing Random">
+          <span class="badge">Boxing Random</span>
+        </a>
+        <a class="game-card" href="Assets/Games/BurgerFrights/index.html">
+          <img src="Assets/Game_Images/BurgerFrights.png" alt="Burger Frights">
+          <span class="badge">Burger Frights</span>
+        </a>
+        <a class="game-card" href="Assets/Games/cc3d/index.html">
+          <img src="Assets/Game_Images/CC3d.png" alt="CC3D">
+          <span class="badge">Crazy Cattle 3D</span>
+        </a>
+        <a class="game-card" href="Assets/Games/cell-machine/index.html">
+          <img src="Assets/Game_Images/CellMatchine.png" alt="Cell Machine">
+          <span class="badge">Cell Machine</span>
+        </a>
+
+        <a class="game-card" href="Assets/Games/cut-the-rope/index.html">
+          <img src="Assets/Game_Images/CutTheRope.png" alt="Cut The Rope">
+          <span class="badge">Cut The Rope</span>
+        </a>
+        <a class="game-card" href="Assets/Games/draw-the-hill/index.html">
+          <img src="Assets/Game_Images/DrawTheHill.png" alt="Draw The Hill">
+          <span class="badge">Draw The Hill</span>
+        </a>
+
+
+
+
+        <a class="game-card" href="Assets/Games/fruitninja/index.html">
+          <img src="Assets/Game_Images/FruitNinja.png" alt="Fruit Ninja">
+          <span class="badge">Fruit Ninja</span>
+        </a>
+        <a class="game-card" href="Assets/Games/jetpack-joyride/index.html">
+          <img src="Assets/Game_Images/JetpackJoyride.png" alt="Jetpack Joyride">
+          <span class="badge">Jetpack Joyride</span>
+        </a>
+
+
+
+        <a class="game-card" href="Assets/Games/papas-game/index.html">
+          <img src="Assets/Game_Images/PapasPizzaria.png" alt="Papa's Pizzaria">
+          <span class="badge">Papa's Pizzaria</span>
+        </a>
+
+
+
+        <a class="game-card" href="Assets/Games/tiny-fishing/index.html">
+          <img src="Assets/Game_Images/TinyFishing.png" alt="Tiny Fishing">
+          <span class="badge">Tiny Fishing</span>
+        </a>
+    
+
+                          <a href="Assets/Games/wordle/index.html" class="game-card">
+                        <img src="Assets/Games/wordle/img/logo_512x512.png" alt="G's wordle">
+                        <span class="badge">Wordle</span>
+                    </a>
+        
+                    </div>
+        
+    <!-- Upcoming Section -->
+    <section class="upcoming-section">
+      <h2>Upcoming</h2>
+      <p>upcoming</p>
+    </section>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Service worker registration (same as page.html)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Password verification script (copied from page.html) -->
+    <script>
+      // ===== CONFIGURE PASSWORD HERE =====
+      // NOTE: This is client-side only. It's not secure for protecting sensitive content.
+      const PASSWORD = 'same1'; // <-- set your desired password
+      const GITHUB_TRIGGER = 'git'; // typing this opens the gethin101/maths repo
+      const OG_TRIGGER = 'og'; // typing this opens parkerjohnathan834-afk/raddify repo
+      const CODE_TRIGGER = 'code'; // typing this opens code.html
+
+      const overlay = document.getElementById('captchaOverlay');
+      const input = document.getElementById('captchaPasswordInput');
+      const btn = document.getElementById('captchaConfirmBtn');
+      const msg = document.getElementById('captchaMessage');
+
+      function showMessage(text, show = true) {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.style.display = show ? 'block' : 'none';
+      }
+
+      function openUrlInNewTab(url, feedback) {
+        try {
+          window.open(url, '_blank', 'noopener');
+          if (feedback) showMessage(feedback, true);
+        } catch (e) {
+          // popup might be blocked; fallback to navigating current tab
+          window.location.href = url;
+        }
+      }
+
+      function handleTriggerCommand(val) {
+        const lower = val.toLowerCase();
+        if (lower === GITHUB_TRIGGER) {
+          openUrlInNewTab('https://github.com/gethin101/maths', 'Opening main repo...');
+          return true;
+        }
+        if (lower === OG_TRIGGER) {
+          openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...');
+          return true;
+        }
+        if (lower === CODE_TRIGGER) {
+          openUrlInNewTab('code.html', 'Opening code page...');
+          return true;
+        }
+        return false;
+      }
+
+      function verify() {
+        const raw = input.value || '';
+        const val = raw.trim();
+        if (!val) {
+          showMessage('Please enter a password or command.');
+          input.focus();
+          return;
+        }
+
+        // If user typed a special trigger word, open the corresponding GitHub repo or page
+        if (handleTriggerCommand(val)) {
+          // Clear input but keep overlay visible so user can still enter the real password
+          input.value = '';
+          return;
+        }
+
+        // Normal password check
+        if (val === PASSWORD) {
+          showMessage('', false);
+          // Hide overlay on success
+          if (overlay) overlay.style.display = 'none';
+          // Intentionally do NOT store a session flag so the overlay appears every page load
+        } else {
+          showMessage('Access denied: incorrect password.');
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      // Ensure the overlay is visible on every page load.
+      if (overlay) {
+        overlay.style.display = 'flex';
+        overlay.style.position = overlay.style.position || 'fixed';
+        overlay.style.top = overlay.style.top || '0';
+        overlay.style.left = overlay.style.left || '0';
+        overlay.style.width = overlay.style.width || '100%';
+        overlay.style.height = overlay.style.height || '100%';
+        overlay.style.zIndex = overlay.style.zIndex || '9999';
+        overlay.style.alignItems = overlay.style.alignItems || 'center';
+        overlay.style.justifyContent = overlay.style.justifyContent || 'center';
+      }
+
+      if (btn) btn.addEventListener('click', verify);
+      if (input) input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') verify();
+      });
+    </script>
+
+    <!-- Optional developer-only snippet to clear service workers & caches while testing.
+         Remove this before publishing if you want the service worker to remain active. -->
+    <script>
+      // Uncomment to unregister service workers and clear caches (useful while testing page updates).
+      /*
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+      }
+      if (window.caches) {
+        caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+      }
+      */
+    </script>
+</body>
+</html>
