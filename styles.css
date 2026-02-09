@@ -322,7 +322,7 @@
 
 :root {
     /* Dark theme variables */
-    --primary-bg: #000000;
+    --primary-bg: #000033;
     --secondary-bg: rgba(32, 32, 32, 0.8);
     --text-color: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
