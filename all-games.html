@@ -103,6 +103,81 @@
             line-height: 1.6;
             font-size: 1rem;
         }
+
+
+        /* ================= SEARCH CONTAINER ================= */
+.search-container {
+  max-width: 600px;            /* limits width */
+  margin: 2rem auto;           /* center horizontally with space above/below */
+  position: relative;           /* for positioning clear button */
+}
+
+/* ================= SEARCH INPUT ================= */
+.search-input {
+  width: 100%;
+  padding: 14px 44px 14px 16px;  /* left padding for text, right padding for clear button */
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color, #333);
+  background: var(--card-bg, #222);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* ================= CLEAR BUTTON ================= */
+.clear-search {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  cursor: pointer;
+  color: #aaa;
+  display: none;               /* hidden by default */
+  transition: color 0.2s;
+}
+
+.clear-search:hover {
+  color: #fff;
+}
+
+/* ================= NO RESULTS ================= */
+#no-results {
+  text-align: center;
+  color: #aaa;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ================= MOBILE RESPONSIVENESS ================= */
+@media (max-width: 600px) {
+  .search-container {
+    margin: 1.5rem auto;
+    max-width: 90%;
+  }
+
+  .search-input {
+    padding: 12px 40px 12px 12px;
+    font-size: 0.9rem;
+  }
+
+  .clear-search {
+    right: 10px;
+    font-size: 18px;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -160,39 +235,45 @@
         <p>- Added Level Devil game</p>
     </section>
 
-    <!-- Search bar -->
-    <div style="position: relative; display: inline-block;">
-        <input type="text" id="search" placeholder="Search games..." style="padding-right: 30px;">
-        <span id="clear-search" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: #666; display: none;">×</span>
-    </div>
-    <p id="no-results" style="display:none; margin-top:10px;">No results found</p>
+    
+<!-- Search bar -->
+<div class="search-container">
+    <input type="text" id="search" class="search-input" placeholder="Search games...">
+    <span id="clear-search" class="clear-search">×</span>
+</div>
+<p id="no-results">No results found</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const search = document.getElementById('search');
-            const clearBtn = document.getElementById('clear-search');
-            const cards = document.querySelectorAll('.game-card');
-            const noResults = document.getElementById('no-results');
+    const search = document.getElementById('search');
+    const clearBtn = document.getElementById('clear-search');
+    const cards = document.querySelectorAll('.game-card');
+    const noResults = document.getElementById('no-results');
 
-            function updateFilter() {
-                const text = search.value.toLowerCase();
-                let visibleCount = 0;
-                cards.forEach(card => {
-                    const title = card.querySelector('.badge').textContent.toLowerCase();
-                    const match = title.includes(text);
-                    card.style.display = match ? '' : 'none';
-                    if (match) visibleCount++;
-                });
-                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-                clearBtn.style.display = text ? 'block' : 'none';
-            }
+    function updateFilter() {
+        const text = search.value.toLowerCase();
+        let visibleCount = 0;
 
-            search.addEventListener('input', updateFilter);
-            clearBtn.addEventListener('click', () => {
-                search.value = '';
-                updateFilter();
-            });
+        cards.forEach(card => {
+            const title = card.querySelector('.badge').textContent.toLowerCase();
+            const match = title.includes(text);
+            card.style.display = match ? 'flex' : 'none';
+            if (match) visibleCount++;
         });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        clearBtn.style.display = text ? 'block' : 'none';
+    }
+
+    search.addEventListener('input', updateFilter);
+
+    clearBtn.addEventListener('click', () => {
+        search.value = '';
+        updateFilter();
+        search.focus(); // focus after clearing
+    });
+});
+
     </script>
 
     <!-- Games grid -->
