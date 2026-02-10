@@ -166,6 +166,54 @@
     </section>
 
 
+<div style="position: relative; display: inline-block;">
+  <input type="text" id="search" placeholder="Search games..." style="padding-right: 30px;">
+  <span id="clear-search" style="
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    display: none;
+  ">×</span>
+</div>
+
+<p id="no-results" style="display:none; margin-top:10px;">
+  No results found
+</p>
+
+<script>
+  const search = document.getElementById('search');
+  const clearBtn = document.getElementById('clear-search');
+  const cards = document.querySelectorAll('.game-card');
+  const noResults = document.getElementById('no-results');
+
+  function updateFilter() {
+    const text = search.value.toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const title = card.querySelector('.badge').textContent.toLowerCase();
+      const match = title.includes(text);
+      card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    clearBtn.style.display = text ? 'block' : 'none';
+  }
+
+  search.addEventListener('input', updateFilter);
+
+  clearBtn.addEventListener('click', () => {
+    search.value = '';
+    updateFilter();
+  });
+</script>
+
+
     
    <!--  <h1 style="text-align:center; margin-top:16px;">All Games</h1> -->
   
