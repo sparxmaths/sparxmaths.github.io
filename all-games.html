@@ -185,6 +185,7 @@
 </p>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   const search = document.getElementById('search');
   const clearBtn = document.getElementById('clear-search');
   const cards = document.querySelectorAll('.game-card');
@@ -211,8 +212,8 @@
     search.value = '';
     updateFilter();
   });
+});
 </script>
-
 
     
    <!--  <h1 style="text-align:center; margin-top:16px;">All Games</h1> -->
