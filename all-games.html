@@ -130,19 +130,27 @@
         </div>
     </div>
 
-    <header>
-        <nav>
-            <div class="nav-left">
-                <button class="nav-left" onclick="window.location.href='https://sparxmaths.com/?hsLang=en-gb';" style="background:none; border:none; padding:0; cursor:pointer;">
-                    <img src="Assets/Images/Logo.png" alt="sparx Logo" class="logo">
-                    <h1>Sparx</h1>
-                </button>
-                <a href="index.html" class="credits-btn back-home-btn" style="padding:7px 14px; margin:0 8px; display:flex; align-items:center; justify-content:center; min-width:40px; min-height:40px;">
-                    <img src="Assets/Images/Home.png" alt="refresh" style="width:26px; height:26px; display:block; filter:invert(0);">
-                </a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
+   
+        <div class="nav-left" style="display: flex; align-items: center;">
+            <button onclick="window.location.href='https://sparxmaths.com/?hsLang=en-gb';" 
+                    style="background:none; border:none; padding:0; cursor:pointer; display:flex; align-items:center;">
+                <img src="Assets/Images/Logo.png" alt="sparx Logo" class="logo" style="height:40px;">
+                <h1 style="margin-left:8px;">Sparx</h1>
+            </button>
+        </div>
+
+    
+        <div class="nav-right">
+            <a href="index.html" class="credits-btn back-home-btn" 
+               style="padding:7px 14px; display:flex; align-items:center; justify-content:center; min-width:40px; min-height:40px;">
+                <img src="Assets/Images/Home.png" alt="Home" 
+                     style="width:26px; height:26px; display:block; filter:invert(0);">
+            </a>
+        </div>
+    </nav>
+</header>
 
     <!-- Upcoming updates -->
     <section class="upcoming-section">
