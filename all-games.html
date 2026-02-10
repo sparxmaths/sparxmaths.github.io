@@ -1,175 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sparx Maths</title>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="all-games.css">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
-
-<style>
-/* ================= GRID ================= */
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 2rem auto 3rem;
-  padding: 0 2rem;
-}
-
-.game-card {
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-  min-height: 200px;
-  text-decoration: none;
-  background: var(--card-bg, #222);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border-color, #333);
-  box-shadow: 0 8px 32px rgba(0,0,0,.2);
-}
-
-.game-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(.85);
-  transition: .3s;
-}
-
-.game-card:hover img {
-  transform: scale(1.05);
-  filter: brightness(1);
-}
-
-.badge {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  background: var(--secondary-bg, #444);
-  color: #fff;
-  padding: .5rem 1.2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  border: 1px solid var(--border-color, #333);
-  z-index: 2;
-}
-
-/* ================= UPDATES ================= */
-.upcoming-section {
-  max-width: 1400px;
-  margin: 3rem auto 1.5rem;
-  padding: 2rem;
-  text-align: center;
-  background: var(--card-bg, #222);
-  border-radius: 12px;
-  border: 1px solid var(--border-color, #333);
-}
-
-.upcoming-section h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-}
-
-/* ================= SEARCH ================= */
-.search-container {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 14px 44px 14px 16px;
-  font-size: 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--border-color, #333);
-  background: var(--card-bg, #222);
-  color: #fff;
-}
-
-.search-input::placeholder {
-  color: #aaa;
-}
-
-.clear-search {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  cursor: pointer;
-  color: #aaa;
-  display: none;
-}
-
-.clear-search:hover {
-  color: #fff;
-}
-
-#no-results {
-  text-align: center;
-  color: #aaa;
-  margin-bottom: 2rem;
-}
-
-@media (max-width:600px){
-  .game-card{min-height:120px}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparx Maths</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="all-games.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .game-card {
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            min-height: 200px;
+            height: 200px;
+            background: var(--card-bg, #222);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color, #333);
+            transition: all 0.3s;
+        }
+        .game-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.3s, filter 0.3s;
+            filter: brightness(0.85);
+        }
+        .game-card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+        .game-card .badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: var(--secondary-bg, #444);
+            color: var(--text-color, #fff);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            border: 1px solid var(--border-color, #333);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2;
+            max-width: 90%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @media (max-width: 600px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+                padding: 0 0.5rem;
+            }
+            .game-card {
+                min-height: 120px;
+                height: 120px;
+            }
+        }
+        nav, h1, .back-home-btn {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+        .upcoming-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 2rem;
+            text-align: center;
+            background: var(--card-bg, #222);
+            border-radius: 12px;
+            border: 1px solid var(--border-color, #333);
+        }
+        .upcoming-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            color: var(--text-color, #fff);
+        }
+        .upcoming-section p {
+            color: var(--text-color, #fff);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Loading screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <img src="Assets/Images/Logo.png" alt="Logo" class="loading-logo">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
 
-<!-- ================= UPDATES ================= -->
-<section class="upcoming-section">
-  <h2>Updates</h2>
-  <p>- Removed Moto x3m games bcs they weren't working</p>
-  <p>- Added Getaway Shootout game</p>
-  <p>- Added Level Devil game</p>
-  <p>-<b>Added a search bar for games</b></p>
-</section>
+    <!-- Verification overlay -->
+    <div class="notice-overlay" id="captchaOverlay">
+        <div class="captcha-container">
+            <div class="captcha-content">
+                <h3>Enter code:</h3>
+                <input id="captchaPasswordInput" type="password" class="captcha-input" placeholder="Enter code">
+                <div class="captcha-buttons">
+                    <button id="captchaConfirmBtn" class="captcha-btn confirm-btn">Confirm</button>
+                </div>
+                <div id="captchaMessage" style="color:#e74c3c; margin-top:8px; display:none;"></div>
+            </div>
+        </div>
+    </div>
 
-<!-- ================= SEARCH ================= -->
-<div class="search-container">
-  <input id="search" class="search-input" placeholder="Search games...">
-  <span id="clear-search" class="clear-search">×</span>
-</div>
-<p id="no-results" style="display:none;">No results found</p>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <button class="nav-left" onclick="window.location.href='https://sparxmaths.com/?hsLang=en-gb';" style="background:none; border:none; padding:0; cursor:pointer;">
+                    <img src="Assets/Images/Logo.png" alt="sparx Logo" class="logo">
+                    <h1>Sparx</h1>
+                </button>
+                <a href="index.html" class="credits-btn back-home-btn" style="padding:7px 14px; margin:0 8px; display:flex; align-items:center; justify-content:center; min-width:40px; min-height:40px;">
+                    <img src="Assets/Images/Home.png" alt="refresh" style="width:26px; height:26px; display:block; filter:invert(0);">
+                </a>
+            </div>
+        </nav>
+    </header>
 
-<!-- ================= GAMES ================= -->
-<div class="games-grid">
+    <!-- Upcoming updates -->
+    <section class="upcoming-section">
+        <h2>Updates</h2>
+        <p>- Removed Moto x3m games bcs they weren't working</p>
+        <p>- Added Getaway Shootout game</p>
+        <p>- Added Level Devil game</p>
+    </section>
 
+    <!-- Search bar -->
+    <div style="position: relative; display: inline-block;">
+        <input type="text" id="search" placeholder="Search games..." style="padding-right: 30px;">
+        <span id="clear-search" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: #666; display: none;">×</span>
+    </div>
+    <p id="no-results" style="display:none; margin-top:10px;">No results found</p>
 
-       
-                        <a href="Assets/Games/minecraft-case-simulator/index.html" class="game-card">
-                        <img src="Assets/Games/minecraft-case-simulator/icons/case_simulator.png" alt="Minecraft case simulator">
-                        <span class="badge">Minecraft case simulator</span>
-                    </a>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const search = document.getElementById('search');
+            const clearBtn = document.getElementById('clear-search');
+            const cards = document.querySelectorAll('.game-card');
+            const noResults = document.getElementById('no-results');
 
+            function updateFilter() {
+                const text = search.value.toLowerCase();
+                let visibleCount = 0;
+                cards.forEach(card => {
+                    const title = card.querySelector('.badge').textContent.toLowerCase();
+                    const match = title.includes(text);
+                    card.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                clearBtn.style.display = text ? 'block' : 'none';
+            }
 
+            search.addEventListener('input', updateFilter);
+            clearBtn.addEventListener('click', () => {
+                search.value = '';
+                updateFilter();
+            });
+        });
+    </script>
 
-        
-        
-                            <a href="Assets/Games/LevelDevil/index.html" class="game-card">
-                        <img src="Assets/Games/LevelDevil/logo.png" alt="G's level devil">
-                        <span class="badge">Level Devil</span>
-                    </a>
-
-
-        
-        
-                        <a class="game-card" href="Assets/Games/paperio2/index.html">
-          <img src="Assets/Game_Images/Paperio2.png" alt="Paper.io 2">
-          <span class="badge">Paper.io 2</span>
+    <!-- Games grid -->
+    <div class="games-grid">
+        <a href="Assets/Games/minecraft-case-simulator/index.html" class="game-card">
+            <img src="Assets/Games/minecraft-case-simulator/icons/case_simulator.png" alt="Minecraft case simulator">
+            <span class="badge">Minecraft case simulator</span>
         </a>
-        <a class="game-card" href="Assets/Games/stickman/index.html">
+        <a href="Assets/Games/LevelDevil/index.html" class="game-card">
+            <img src="Assets/Games/LevelDevil/logo.png" alt="G's level devil">
+            <span class="badge">Level Devil</span>
+        </a>
+        <a class="game-card" href="Assets/Games/paperio2/index.html">
+            <img src="Assets/Game_Images/Paperio2.png" alt="Paper.io 2">
+            <span class="badge">Paper.io 2</span>
+        </a>
+ <a class="game-card" href="Assets/Games/stickman/index.html">
           <img src="Assets/Game_Images/StickmanHook.png" alt="Stickman Hook">
           <span class="badge">Stickman Hook</span>
         </a>
@@ -655,36 +687,75 @@
 
 
 
-<!-- ================= SEARCH SCRIPT ================= -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const search = document.getElementById('search');
-  const clearBtn = document.getElementById('clear-search');
-  const cards = document.querySelectorAll('.game-card');
-  const noResults = document.getElementById('no-results');
+    <script src="script.js"></script>
 
-  function updateFilter() {
-    const text = search.value.toLowerCase();
-    let count = 0;
+    <script>
+        // Service worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('ServiceWorker registration successful'))
+                    .catch(err => console.log('ServiceWorker registration failed:', err));
+            });
+        }
+    </script>
 
-    cards.forEach(card => {
-      const title = card.querySelector('.badge').textContent.toLowerCase();
-      const match = title.includes(text);
-      card.style.display = match ? 'flex' : 'none';
-      if (match) count++;
-    });
+    <!-- Password verification -->
+    <script>
+        const PASSWORD = 'same1';
+        const GITHUB_TRIGGER = 'git';
+        const OG_TRIGGER = 'og';
+        const CODE_TRIGGER = 'code';
+        const overlay = document.getElementById('captchaOverlay');
+        const input = document.getElementById('captchaPasswordInput');
+        const btn = document.getElementById('captchaConfirmBtn');
+        const msg = document.getElementById('captchaMessage');
 
-    noResults.style.display = count === 0 ? 'block' : 'none';
-    clearBtn.style.display = text ? 'block' : 'none';
-  }
+        function showMessage(text, show = true) {
+            if (!msg) return;
+            msg.textContent = text;
+            msg.style.display = show ? 'block' : 'none';
+        }
 
-  search.addEventListener('input', updateFilter);
-  clearBtn.addEventListener('click', () => {
-    search.value = '';
-    updateFilter();
-  });
-});
-</script>
+        function openUrlInNewTab(url, feedback) {
+            try {
+                window.open(url, '_blank', 'noopener');
+                if (feedback) showMessage(feedback, true);
+            } catch (e) {
+                window.location.href = url;
+            }
+        }
 
+        function handleTriggerCommand(val) {
+            const lower = val.toLowerCase();
+            if (lower === GITHUB_TRIGGER) { openUrlInNewTab('https://github.com/gethin101/maths', 'Opening main repo...'); return true; }
+            if (lower === OG_TRIGGER) { openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...'); return true; }
+            if (lower === CODE_TRIGGER) { openUrlInNewTab('code.html', 'Opening code page...'); return true; }
+            return false;
+        }
+
+        function verify() {
+            const val = (input.value || '').trim();
+            if (!val) { showMessage('Please enter a password or command.'); input.focus(); return; }
+            if (handleTriggerCommand(val)) { input.value = ''; return; }
+            if (val === PASSWORD) { if (overlay) overlay.style.display = 'none'; showMessage('', false); }
+            else { showMessage('Access denied: incorrect password.'); input.value = ''; input.focus(); }
+        }
+
+        if (overlay) {
+            overlay.style.display = 'flex';
+            overlay.style.position = overlay.style.position || 'fixed';
+            overlay.style.top = overlay.style.top || '0';
+            overlay.style.left = overlay.style.left || '0';
+            overlay.style.width = overlay.style.width || '100%';
+            overlay.style.height = overlay.style.height || '100%';
+            overlay.style.zIndex = overlay.style.zIndex || '9999';
+            overlay.style.alignItems = overlay.style.alignItems || 'center';
+            overlay.style.justifyContent = overlay.style.justifyContent || 'center';
+        }
+
+        if (btn) btn.addEventListener('click', verify);
+        if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') verify(); });
+    </script>
 </body>
 </html>
