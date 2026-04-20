@@ -231,6 +231,7 @@
     <!-- Upcoming updates -->
     <section class="upcoming-section">
         <h2>Sparx Games</h2>
+        <p>Verify clicks today: <span id="verifyDisplay">0</span></p>
     </section>
 
     
@@ -763,61 +764,75 @@
     </script>
 
     <!-- Password verification -->
-    <script>
-        const PASSWORD = '123';
-        const GITHUB_TRIGGER = 'git';
-        const OG_TRIGGER = 'og';
-        const CODE_TRIGGER = 'code';
-        const overlay = document.getElementById('captchaOverlay');
-        const input = document.getElementById('captchaPasswordInput');
-        const btn = document.getElementById('captchaConfirmBtn');
-        const msg = document.getElementById('captchaMessage');
+<script>
+    const PASSWORD = '123';
+    const GITHUB_TRIGGER = 'git';
+    const OG_TRIGGER = 'og';
+    const CODE_TRIGGER = 'code';
+    const overlay = document.getElementById('captchaOverlay');
+    const input = document.getElementById('captchaPasswordInput');
+    const btn = document.getElementById('captchaConfirmBtn');
+    const msg = document.getElementById('captchaMessage');
 
-        function showMessage(text, show = true) {
-            if (!msg) return;
-            msg.textContent = text;
-            msg.style.display = show ? 'block' : 'none';
+    // VERIFY BUTTON COUNTER
+    let verifyClickCount = 0;
+
+    function showMessage(text, show = true) {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.style.display = show ? 'block' : 'none';
+    }
+
+    function openUrlInNewTab(url, feedback) {
+        try {
+            window.open(url, '_blank', 'noopener');
+            if (feedback) showMessage(feedback, true);
+        } catch (e) {
+            window.location.href = url;
         }
+    }
 
-        function openUrlInNewTab(url, feedback) {
-            try {
-                window.open(url, '_blank', 'noopener');
-                if (feedback) showMessage(feedback, true);
-            } catch (e) {
-                window.location.href = url;
-            }
+    function handleTriggerCommand(val) {
+        const lower = val.toLowerCase();
+        if (lower === GITHUB_TRIGGER) { openUrlInNewTab('https://github.com/gethin101/maths', 'Opening main repo...'); return true; }
+        if (lower === OG_TRIGGER) { openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...'); return true; }
+        if (lower === CODE_TRIGGER) { openUrlInNewTab('code.html', 'Opening code page...'); return true; }
+        return false;
+    }
+
+    function verify() {
+        const val = (input.value || '').trim();
+        if (!val) { showMessage('Please enter a password or command.'); input.focus(); return; }
+        if (handleTriggerCommand(val)) { input.value = ''; return; }
+        if (val === PASSWORD) { 
+            verifyClickCount++;  // INCREMENT HERE
+            console.log('Verify count:', verifyClickCount);  // Log to console for debugging
+            if (overlay) overlay.style.display = 'none'; 
+            showMessage('', false); 
         }
+        else { showMessage('Access denied: incorrect password.'); input.value = ''; input.focus(); }
+    }
 
-        function handleTriggerCommand(val) {
-            const lower = val.toLowerCase();
-            if (lower === GITHUB_TRIGGER) { openUrlInNewTab('https://github.com/gethin101/maths', 'Opening main repo...'); return true; }
-            if (lower === OG_TRIGGER) { openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...'); return true; }
-            if (lower === CODE_TRIGGER) { openUrlInNewTab('code.html', 'Opening code page...'); return true; }
-            return false;
-        }
+    if (overlay) {
+        overlay.style.display = 'flex';
+        overlay.style.position = overlay.style.position || 'fixed';
+        overlay.style.top = overlay.style.top || '0';
+        overlay.style.left = overlay.style.left || '0';
+        overlay.style.width = overlay.style.width || '100%';
+        overlay.style.height = overlay.style.height || '100%';
+        overlay.style.zIndex = overlay.style.zIndex || '9999';
+        overlay.style.alignItems = overlay.style.alignItems || 'center';
+        overlay.style.justifyContent = overlay.style.justifyContent || 'center';
+    }
 
-        function verify() {
-            const val = (input.value || '').trim();
-            if (!val) { showMessage('Please enter a password or command.'); input.focus(); return; }
-            if (handleTriggerCommand(val)) { input.value = ''; return; }
-            if (val === PASSWORD) { if (overlay) overlay.style.display = 'none'; showMessage('', false); }
-            else { showMessage('Access denied: incorrect password.'); input.value = ''; input.focus(); }
-        }
-
-        if (overlay) {
-            overlay.style.display = 'flex';
-            overlay.style.position = overlay.style.position || 'fixed';
-            overlay.style.top = overlay.style.top || '0';
-            overlay.style.left = overlay.style.left || '0';
-            overlay.style.width = overlay.style.width || '100%';
-            overlay.style.height = overlay.style.height || '100%';
-            overlay.style.zIndex = overlay.style.zIndex || '9999';
-            overlay.style.alignItems = overlay.style.alignItems || 'center';
-            overlay.style.justifyContent = overlay.style.justifyContent || 'center';
-        }
-
-        if (btn) btn.addEventListener('click', verify);
-        if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') verify(); });
-    </script>
+    if (btn) btn.addEventListener('click', verify);
+    if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') verify(); });
+</script>
+<script>
+    // Update display whenever count changes
+    setInterval(() => {
+        document.getElementById('verifyDisplay').textContent = verifyClickCount;
+    }, 100);
+</script>
 </body>
 </html>
